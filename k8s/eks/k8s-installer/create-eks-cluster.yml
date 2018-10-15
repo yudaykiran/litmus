@@ -72,6 +72,11 @@
             executable: /bin/bash
           with_items: "{{ result.instances }}"
           no_log: true
+          
+        - name: Set ClusterRoleBinding
+          shell: kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=icpuser@{{cluster_name}}.us-west-2.eksctl.io
+          args:
+            executable: /bin/bash
 
         - name: Set Test Status
           set_fact:
